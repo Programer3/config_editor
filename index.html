@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>File Editor</title>
+    <style>
+      body {
+        background-color: lightgreen;
+      }
+    </style>
+  </head>
+  <body>
+    <input
+      type="file"
+      id="fileInput"
+      onchange="loadFile(event)"
+      style="display: none" />
+    <button onclick="document.getElementById('fileInput').click();">
+      Select
+    </button>
+    <button onclick="loadDefault()">Load Default</button>
+    <textarea
+      id="fileContent"
+      rows="10"
+      cols="30"
+      oninput="saveChanges()"></textarea>
+    <script>
+      let configfilename;
+      let fileReader = new FileReader();
+      let loadedFile;
+
+      fileReader.onload = function (event) {
+        document.getElementById("fileContent").value = event.target.result;
+      };
+
+      function loadFile(event) {
+        loadedFile = event.target.files[0];
+        configfilename = loadedFile.name;
+        fileReader.readAsText(loadedFile);
+      }
+
+      function loadDefault() {
+        fetch("/test.txt")
+          .then(response => response.text())
+          .then(data => {
+            document.getElementById("fileContent").value = data;
+            configfilename = "test.txt";
+          })
+          .catch(error => {
+            console.error("Error loading default file:", error);
+          });
+      }
+
+      function saveChanges() {
+        if (!configfilename) return;
+
+        let editedContent = document.getElementById("fileContent").value;
+        let editedFileName =
+          configfilename.split(".")[0] +
+          "_edited." +
+          configfilename.split(".")[1];
+        let editedBlob = new Blob([editedContent], { type: "text/plain" });
+
+        if (loadedFile) {
+          saveToFileSystem(
+            loadedFile.webkitRelativePath,
+            editedFileName,
+            editedBlob
+          );
+        } else {
+          console.error("No file loaded to save changes.");
+        }
+      }
+
+      function saveToFileSystem(path, fileName, blob) {
+        // Save to file system
+        console.log("Saving to file system:", path, fileName, blob);
+      }
+    </script>
+  </body>
+</html>

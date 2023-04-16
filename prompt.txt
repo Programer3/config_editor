@@ -1,0 +1,34 @@
+write a program in javascript which reads a file and displays its content in browser's webpage input field and allows to modify that file from that webpage using input field and buttons.
+generate both html and javascript code and they should be linked together in one file named index.html. here are some detailed requirements,
+
+A simple page with a resizable input field, and a script tag with scripts inside it. body should have a backgound colour of light green.
+ The script is used to edit the configuration file stored in local pc not on server as this also works when offline.
+ The script should allow the user to select the configuration file using file manager when select button is pressed, or use default if load-default button pressed.
+ default file path is "c://user/desktop/config.cfg".
+ The function in script should be called with a query string parameter configfilename a varible, which stores the name of the configuration file to be edited.
+ The script should display the contents of the configuration file in a form's input element named configfilename when load-default button is pressed.
+ The script should allow the user to edit the contents of the configuration file.
+ The script should automatically save the contents of the configuration file when its modified in input filed.
+ The script should create a copy as text file on same location/path, as soon as something changes in original loaded file.
+
+ 
+  // above js code is not working and is not loading the file, given these
+  reasons: // 1. the file is not being loaded from the path given in the query
+  string parameter // 2. the file is not being loaded from the default path //
+  3. the file is not being loaded from the path selected by the user // 4. the
+  file is not being saved to the path selected by the user // these were the
+  requirements of the task // The script is used to edit the configuration file
+  stored in local machine. // The script should allow the user to select the
+  configuration file using file manager when select button is pressed, or use
+  default if load-default button pressed. // default file path is
+  "c://user/desktop/config.cfg". // The function in script should be called with
+  a query string parameter configfilename a varible, which stores the name of
+  the configuration file to be edited. // The script should display the contents
+  of the configuration file in a form's input element named configfilename when
+  load-default button is pressed. // The script should allow the user to edit
+  the contents of the configuration file. // The script should automatically
+  save the contents of the configuration file when its modified in input filed.
+  // The script should create a copy as text file on same location/path, as soon
+  as something changes in original loaded file. // this below is the updated
+  javascript code for the above described task with all the requirements
+  fulfilled.
